@@ -1,0 +1,40 @@
+---
+- name: configure needed repositories 
+  yum_repository:
+    name: mariadb
+    file: mariadb
+    baseurl: http://yum.mariadb.org/10.1/centos7-amd64
+    gpgcheck: yes
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    state: present
+
+- name: install epel and php reporitory
+  yum:
+    name:
+    - https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+    - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: install needed packages 
+  yum:
+    name: 
+    - mod_php71w 
+    - php71w-common 
+    - php71w-mbstring 
+    - php71w-xmlrpc 
+    - php71w-soap 
+    - php71w-gd 
+    - php71w-xml 
+    - php71w-intl 
+    - php71w-mysqlnd 
+    - php71w-cli 
+    - php71w-mcrypt 
+    - php71w-ldap 
+    - php71w-pear 
+    - php71w-pecl-memcached
+    - mariadb
+    - mariadb-server 
+    - php71w-opcache
+    - php-pecl-zip
+    - zip 
+    - unzip

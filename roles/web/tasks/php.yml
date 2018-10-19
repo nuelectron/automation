@@ -1,0 +1,8 @@
+---
+- name: copy config-php to root directory 
+  template:
+    path: config.php.j2
+    dest: /var/www/html/moodle/config.php
+    mode: 0644
+    owner: apach
+  notify: "restart httpd"

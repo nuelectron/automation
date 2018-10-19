@@ -1,0 +1,41 @@
+---
+- name: fetch moodle and extract
+  unarchive:
+    src: moodle-3.0.10.zip
+    dest: /var/www/html/moodle/ 
+    remote_src: no
+
+- name: move the content of moodle to moodle
+  copy: 
+    src: /var/www/html/moodle/moodle/
+    dest: /var/www/html/moodle/
+    remote_src: yes
+
+- name: delete moodle 
+  file:
+    path: /var/www/html/moodle/moodle
+    state: absent
+    recurse: yes
+
+- name: chown ownership of moodle
+  file: 
+    path: /var/www/html/moodle
+    owner: apache
+    group: apache
+    mode: "u=rwX,g=rX,o=rX"
+    recurse: yes
+
+
+- name: change ownership of moodledata
+  file: 
+    path: /var/www/moodledata
+    mode: 2777
+
+- name: Add remi-php71
+  yum_repository:
+    name: remi-php55
+    description: Remi's PHP 55 RPM repository for Enterprise Linux $releasever - $basearch
+    mirrorlist: http://rpms.remirepo.net/enterprise/$releasever/php55/mirror
+    enabled: yes
+    gpgcheck: 1
+    gpgkey: http://rpms.remirepo.net/RPM-GPG-KEY-remi

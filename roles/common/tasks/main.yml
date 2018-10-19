@@ -1,0 +1,4 @@
+---
+# tasks file for roles/common
+- include_tasks: pkginstall.yml
+- include_tasks: lvm.yml

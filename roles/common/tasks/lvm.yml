@@ -1,0 +1,28 @@
+---
+- name: create logical volume 
+  lvol: 
+    vg: volGroup00
+    lv: "{{ item.name }}"
+    size: "{{ item.size }}g"
+  with_items:
+    - { name: 'moodle', size: 20 }
+    - { name: 'moodledata', size: 20 } 
+
+- name: create filesystem on moodle
+  filesystem:  fstype=xfs dev=/dev/volGroup00/moodle
+
+- name: create filesystem on moodledata
+  filesystem: fstype=xfs dev=/dev/volGroup00/moodledata
+   
+- name: mount moodle on /var/www/html
+  mount: 
+    path: /var/www/html/moodle
+    src: /dev/volGroup00/moodle
+    state: mounted
+
+- name: mount moodledata on /var/www/moodledata
+  mount: 
+    path: /var/www/moodledata
+    src: /dev/volGroup00/moodledata
+    state: mounted
+

@@ -1,0 +1,9 @@
+---
+- name: copy vhost to webserver
+  template: 
+     src: vhost-moodle.conf.j2
+     dest: /etc/httpd/conf.d/vhost-moodle.conf
+     mode: 0644
+     owner: root
+     group: root
+  notify: "restart httpd"

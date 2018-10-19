@@ -1,0 +1,14 @@
+- name: create moodle database
+  mysql_db:
+    login_user: root
+    login_passorw: "{{ msi_new_mysql_root_pass }}"
+    name: moodledb
+    collation: utf8_unicode_ci
+    enconding: utf8
+
+- name: create moodledb user 
+  mysql_user:
+    name: moodleuser
+    password: "{{ msi_new_mysql_root_pass }}"
+    priv: "moodledb.*:SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER"
+    state: present

@@ -1,0 +1,4 @@
+---
+- include_tasks: securemysal.yml
+- include_tasks: db.yml
+- include_tasks: mycnf.yml

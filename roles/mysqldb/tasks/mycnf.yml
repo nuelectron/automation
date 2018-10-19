@@ -1,0 +1,10 @@
+---
+- name: copy my-cnf to etc
+  copy: 
+    path: my.cnf
+    dest: /etc/
+    owner: root
+    group: root
+    mode: 0644
+  notify: "restart mariadb"
+
